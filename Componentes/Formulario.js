@@ -31,7 +31,18 @@ const Formulario = ({ navigation }) => {
       return;
     }
     try {
-      const datosCadena = JSON.stringify(datos); //Convertimos el objeto "datos" en una cadena.
+      // Verificar si el título ya existe
+      const tituloExistente = await AsyncStorage.getItem(datos.titulo);
+      if (tituloExistente !== null) {
+        Alert.alert(
+          'Error',
+          `La canción con el título "${datos.titulo}" ya existe.`,
+          [{ text: 'OK' }]
+        );
+        return;
+      }
+
+      const datosCadena = JSON.stringify(datos); // Convertimos el objeto "datos" en una cadena.
       await AsyncStorage.setItem(datos.titulo, datosCadena)
       console.log('Datos de la canción guardados:', datosCadena);
       Alert.alert(
