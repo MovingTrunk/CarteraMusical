@@ -6,7 +6,6 @@
 import React, { useRef } from 'react';
 import { View, StyleSheet, Text, TouchableOpacity, Alert, Image } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-//import Video from 'react-native-video';
 import styles from '../styles.js';
 
 const DetalleCancion = ({ route, navigation }) => {
