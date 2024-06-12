@@ -2,17 +2,16 @@
 
 /* App.js se encarga de gestionar las pantallas a las que se puede navegar en la aplicación */  
 
-import React, { useState } from 'react';
-import { View, TextInput, Button, Text  } from 'react-native';
+import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import styles from './styles.js';
 import Formulario from './Componentes/Formulario.js';
 import Cartera from './Componentes/Cartera.js';
 import Home from './Componentes/Home.js';
 import DetalleCancion from './Componentes/DetalleCancion.js';
 import VerVideo from  './Componentes/VerVideo.js';
 
+// Creación del objeto Stack que contiene las propiedades y métodos para configurar y controlar la navegación entre pantallas
 const Stack = createNativeStackNavigator();
 
 const App = () => {

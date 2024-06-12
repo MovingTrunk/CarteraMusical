@@ -27,13 +27,6 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     textAlign: 'center',
   },
-  textInput: {
-    borderColor: 'black',
-    borderWidth: 1,
-    padding: 5,
-    borderRadius: 5,
-    marginBottom: 10
-  },
   button: {
     backgroundColor: 'blue',
     paddingVertical: 10,
@@ -47,19 +40,6 @@ const styles = StyleSheet.create({
     color: 'white',
     marginBottom: 10,
     width: 300,
-  },
-  buttonSecondary: {
-    backgroundColor: '#DDD',
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderRadius: 5,
-    shadowColor: 'black',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.5,
-    shadowRadius: 2,
-    elevation: 5,
-    fontWeight: 'bold',
-    marginBottom: 10
   },
   mainButtons: {
     backgroundColor: 'blue',
@@ -108,14 +88,6 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     resizeMode: 'cover',
     marginBottom: 80
-  },
-  centerContent: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    position: 'absolute',
-    width: '100%',
-    height: '100%'
   },
   text: {
     color: 'white',

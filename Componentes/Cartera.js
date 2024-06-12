@@ -4,7 +4,7 @@
    Desde esta pantalla es posible acceder al detalle de cada canción. */  
 
 import React, { useState, useEffect } from 'react';
-import { View, Text, Button, FlatList, TouchableOpacity, Image } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity, Image } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import styles from '../styles.js';
 
@@ -27,16 +27,16 @@ const Cartera = ({ navigation }) => {
     }
   };
 
-  const handleItemClick = (item) => {
+  const controlarItemClick = (item) => {
     // Contiene las acciones a realizar cuando se hace clic en un elemento de la lista de Mi Cartera Musical
     // Navega a la pantalla de detalle_cancion y pasa los datos del elemento clicado
     navigation.navigate('DetalleCancion', { item });
     console.log('Elemento clicado:', item);
   };
 
-  const renderButton = (item) => {
+  const renderizarBoton = (item) => {
     return (
-      <TouchableOpacity onPress={() => handleItemClick(item)}>
+      <TouchableOpacity onPress={() => controlarItemClick(item)}>
         <Text style={styles.button}>{item.titulo}</Text>
       </TouchableOpacity>
     );
@@ -47,8 +47,9 @@ const Cartera = ({ navigation }) => {
       <Text style={styles.title}>Mi Cartera Musical</Text>
       {datos.length === 0 ? (
       <View style={styles.container}>
+      {/* Image source: https://icon-icons.com/es/icono/cuadro-vacío-reproducir-botón-video/112670 Author: ReactiveDoodles App */}
       <Image
-        style={styles.image} S
+        style={styles.image}
         source={require('../assets/carteraVacia.png')}
         resizeMode="contain"
       />
@@ -57,7 +58,7 @@ const Cartera = ({ navigation }) => {
     ) : (
       <FlatList
         data={datos}
-        renderItem={({ item }) => renderButton(item)}
+        renderItem={({ item }) => renderizarBoton(item)}
         keyExtractor={(item, index) => index.toString()} 
       />
     )}

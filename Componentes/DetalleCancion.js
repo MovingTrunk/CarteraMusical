@@ -3,8 +3,8 @@
 /* DetalleCancion.js se encarga de visualizar los datos asociados a una canción ya catalogada por el usuario. 
    Permite reproducir el video de la cancion, y eliminar la canción. */  
 
-import React, { useRef } from 'react';
-import { View, StyleSheet, Text, TouchableOpacity, Alert, Image } from 'react-native';
+import React from 'react';
+import { View, Text, TouchableOpacity, Alert, Image } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import styles from '../styles.js';
 
@@ -72,14 +72,17 @@ const DetalleCancion = ({ route, navigation }) => {
             <Text style={{ marginBottom: 30 }}>
                 <Text style={{ fontWeight: 'bold' }}>Resultado:</Text> {item.resultado}
             </Text>
-            <TouchableOpacity style={styles.mainButtons3} onPress={() => navigation.navigate('VerVideo', { videoURI: item.videoURI })}>
-                <Text style={styles.text}>Reproducir Video    </Text>
-                <Image
-                    style={{width:45, heigh:45, resizeMode: 'cover'}}
-                    source={require('../assets/RepVideo.png')}
-                    resizeMode="contain"
-                />
-            </TouchableOpacity>
+            {item.videoURI && (
+                <TouchableOpacity style={styles.mainButtons3} onPress={() => navigation.navigate('VerVideo', { videoURI: item.videoURI })}>
+                    <Text style={styles.text}>Reproducir Video    </Text>
+                    {/* Image source: https://icon-icons.com/es/icono/iconfinder-video-editor-películas-producción/112661 Author: ReactiveDoodles App */}
+                    <Image
+                        style={{width:45, height:45, resizeMode: 'cover'}}
+                        source={require('../assets/RepVideo.png')}
+                        resizeMode="contain"
+                    />
+                </TouchableOpacity>
+            )}
             <TouchableOpacity style={styles.deleteButton} onPress={() => { confirmarEliminacion(item.titulo) }}>
                 <Text style={{ color: 'white' }}>Eliminar</Text>
             </TouchableOpacity>
