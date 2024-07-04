@@ -1,3 +1,7 @@
+// Este proyecto ha sido desarrollado como parte del Trabajo de Fin de Estudio, en el Grado en Ingeniería Informática de UNIR.
+
+/* styles.js contiene la definición de los distintos estilos que van a utilizarse en las distintas partes de la aplicación */  
+
 import { StyleSheet, StatusBar } from 'react-native';
 
 const styles = StyleSheet.create({

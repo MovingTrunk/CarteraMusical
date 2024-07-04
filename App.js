@@ -1,6 +1,6 @@
 // Este proyecto ha sido desarrollado como parte del Trabajo de Fin de Estudio, en el Grado en Ingeniería Informática de UNIR.
 
-/* App.js se encarga de gestionar las pantallas a las que se puede navegar en la aplicación */  
+/* App.js se encarga de definir las pantallas a las que se puede navegar en la aplicación */  
 
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
