@@ -1,22 +1,29 @@
 // Este proyecto ha sido desarrollado como parte del Trabajo de Fin de Estudio, en el Grado en Ingeniería Informática de UNIR.
 
 /* DetalleCancion.js se encarga de visualizar los datos asociados a una canción ya catalogada por el usuario. 
-   Permite reproducir el video de la cancion, y eliminar la canción. */  
+   Permite reproducir el video de la cancion, y eliminar la canción. */
 
+//Import de librerias y componentes a utilizar   
 import React from 'react';
 import { View, Text, TouchableOpacity, Alert, Image } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import styles from '../styles.js';
 
+// Definición del componente DetalleCancion
+// route: información sobre la ruta actual.
+// navigation: permite navegar entre pantallas.
 const DetalleCancion = ({ route, navigation }) => {
     // Obteniendo los datos de la canción desde las props de la ruta
+    // route.params contiene un objeto con la información de la canción (item) que se va a mostrar en detalle.
     const { item } = route.params;
 
+    // Definición de la función confirmarEliminacion, que toma el parámetro 'titulo' en referencia al título de la canción a eliminar.
     const confirmarEliminacion = (titulo) => {
         Alert.alert(
-            ' ',
-            `¿Estás seguro de que deseas eliminar la canción "${titulo}"?`,
+            ' ', // No se incluye título para la alerta
+            `¿Estás seguro de que deseas eliminar la canción "${titulo}"?`, // Se personaliza el mensaje con el título de la canción recibido por parámetro.
             [
+                // Definición de los botones
                 {
                     text: 'Cancelar',
                     style: 'cancel',
@@ -24,20 +31,24 @@ const DetalleCancion = ({ route, navigation }) => {
                 {
                     text: 'Eliminar',
                     style: 'destructive',
-                    onPress: () => eliminarTitulo(titulo),
+                    // Al pulsar el botón Eliminar se ejecuta la función eliminarTitulo pasándole el título de la canción como parámetro.
+                    onPress: () => eliminarTitulo(titulo), 
                 },
             ],
-            { cancelable: false }
+            { cancelable: false } // Evita que se pueda cancelar la alerta pulsando fuera de la misma.
         );
     };
 
+    // Definición de la función eliminarTitulo, que recibe el parámetro 'titulo' desde confirmarEliminacion .
     const eliminarTitulo = async (titulo) => {
         try {
+            // Elimina el elemento almacenado con la clave 'titulo' usando AsyncStorage
             await AsyncStorage.removeItem(titulo);
-            Alert.alert('¡ELIMINADA!', `La canción "${titulo}" se ha eliminado de tu Cartera`,
+            Alert.alert('¡ELIMINADA!', `La canción "${titulo}" se ha eliminado de tu Cartera`, // Mensaje de confirmación.
                 [
                     {
                         text: 'OK',
+                        // Navegación automática a Home tras confirmar mensaje de eliminación.
                         onPress: () => navigation.navigate('Home')
                     }
                 ]
@@ -72,6 +83,7 @@ const DetalleCancion = ({ route, navigation }) => {
             <Text style={{ marginBottom: 30 }}>
                 <Text style={{ fontWeight: 'bold' }}>Resultado:</Text> {item.resultado}
             </Text>
+            {/* Creación de TouchableOpacity para el botón "Reproducir Video", que navega a VerVideo pasándole el videoURI como parámetro */}
             {item.videoURI && (
                 <TouchableOpacity style={styles.mainButtons3} onPress={() => navigation.navigate('VerVideo', { videoURI: item.videoURI })}>
                     <Text style={styles.text}>Reproducir Video    </Text>
@@ -83,6 +95,7 @@ const DetalleCancion = ({ route, navigation }) => {
                     />
                 </TouchableOpacity>
             )}
+            {/* Creación de TouchableOpacity para el botón "Eliminar", que llama a confirmarEliminacion pasándole el título como parámetro */}
             <TouchableOpacity style={styles.deleteButton} onPress={() => { confirmarEliminacion(item.titulo) }}>
                 <Text style={{ color: 'white' }}>Eliminar</Text>
             </TouchableOpacity>

@@ -3,10 +3,12 @@
 /* Home.js se encarga de visualizar la pantalla de inicio/bienvenida de la aplicación. 
    Desde esta pantalla es posible acceder al listado de canciones y añadir una nueva */  
 
+//Import de librerias y componentes a utilizar  
 import React from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
 import styles from '../styles.js';
 
+// Definición del componente Home
 const Home = ({ navigation }) => {
 
   return (

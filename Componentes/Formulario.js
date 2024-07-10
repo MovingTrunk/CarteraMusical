@@ -8,9 +8,10 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import styles from '../styles.js';
 import * as ImagePicker from 'expo-image-picker';
 
+// Definición del componente Formulario
 const Formulario = ({ navigation }) => {
 
-  //State para los datos del formulario.
+  // Definición del Hook useState para gestionar y almacenar los datos del formulario, inicializado con valores vacíos.
   const [datos, setDatos] = useState({
     titulo: '',
     autor: '',
@@ -26,6 +27,7 @@ const Formulario = ({ navigation }) => {
   //Función para gestionar el almacenamiento por medio de AsyncStorage de los datos introducidos en el Formulario
   const controlarGuardar = async () => {
     if (!datos.titulo) {
+      // Alert informativo para título vacío.
       alert('Por favor, introduce el título de la canción.');
       return;
     }
@@ -41,9 +43,12 @@ const Formulario = ({ navigation }) => {
         return;
       }
 
-      const datosCadena = JSON.stringify(datos); // Convertimos el objeto "datos" en una cadena.
+      // Conversión del objeto "datos" en una cadena JSON.
+      const datosCadena = JSON.stringify(datos); 
+      // Almacenamiento de los datos en AsyncStorage usando el título como clave
       await AsyncStorage.setItem(datos.titulo, datosCadena)
       console.log('Datos de la canción guardados:', datosCadena);
+      // Alerta de éxito y navegación a la pantalla 'Cartera'
       Alert.alert(
         '¡ENHORABUENA!',
         `La canción "${datos.titulo}" se ha añadido a tu Cartera`,
@@ -54,29 +59,30 @@ const Formulario = ({ navigation }) => {
           }
         ]
       );
+      // Cualquier error que ocurra durante el almacenamiento
     } catch (error) {
       console.log(error.message);
     }
   };
 
-  //State para el control de los datos introducidos en el formulario
+  // Función para actualizar los datos del formulario en el state
   const controlarCambios = (campo, valor) => {
     setDatos({ ...datos, [campo]: valor });
   };
 
-  //Selección de video de la galería del móvil
+  // Función para seleccionar un video de la galería del móvil
   const pickImage = async () => {
-    // No permissions request is necessary for launching the image library
+    // Lanza el selector de imágenes para seleccionar videos
     let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Videos,
+      mediaTypes: ImagePicker.MediaTypeOptions.Videos, // sólo videos
       allowsEditing: true,
       aspect: [4, 3],
-      quality: 1,
+      quality: 1, // Nivel más alto de calidad
     });
 
     console.log(result);
 
-    //Añado la ruta de almacenamiento del video en el móvil al objeto datos.
+    // Añado la ruta de almacenamiento del video en el móvil al objeto datos (si el usuario no cancela).
     if (!result.canceled) {
       controlarCambios('videoURI', result.assets[0].uri)
       Alert.alert(

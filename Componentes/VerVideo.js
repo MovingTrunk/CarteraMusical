@@ -22,8 +22,10 @@ const VerVideo = ({ route }) => {
 };
 
 // Componente que se encarga de cargar y reproducir el video
+// Recibe el URI del video como prop
+// El componente carga y muestra el video indicado en el URI.
 const VideoPlayer = ({ videoURI }) => {
-    const [videoLoaded, setVideoLoaded] = React.useState(false); // Estado para controlar si el video se ha cargado
+    const [videoLoaded, setVideoLoaded] = React.useState(false); // Estado para controlar si el video se ha cargado o no
 
     // useEffect que se ejecuta cuando el componente se monta o cuando cambia el URI del video
     React.useEffect(() => {
